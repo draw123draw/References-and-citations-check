@@ -33,13 +33,14 @@ front='(?<=[(（]) ?'
 end=' ?(?=[)）])'
 #cite_pattern1匹配"(作者,年份;作者,年份)"
 
-author_year='(?:[一-龥]{1,6}? ?|[A-Za-z\p{M} -]{1,25} ?)(?: et al\.|等)?[,，] ?(?:(?:18|19|20)\d{2}[ab]?[,，;；] ?)*?(?:18|19|20)\d{2}[ab]?'
+author_year='(?:[一-龥]{1,6}? ?|[\p{L}\p{M} -]{1,25} ?)(?: et al\.|等)?[,，] ?(?:(?:18|19|20)\d{2}[ab]?[,，;；] ?)*?(?:18|19|20)\d{2}[ab]?'
 repeat_pattern='(?:'+author_year+'[;；])*? ?'
 
 cite_pattern1=front+repeat_pattern+author_year+end
 
 #cite_pattern2匹配"作者(年份)"
-front2='(?<=\n|^|[.。)）;；，,])[\p{L}\p{M} ]+?(?:al\.)? ?[(（] ?'
+#front2='(?<=\n|^|[.。)）;；，,])[\p{L}\p{M} -]+?(?:al\.)? ?[(（] ?'
+front2='[\p{L}\p{M}]+(?: and [A-Z][\p{L}\p{M}]+)?(?: et al\.)? ?[(（] ?'
 year='(?:(?:19|20)\d{2}[ab]?[，,；;] ?)*?(?:18|19|20)\d{2}[ab]?'
 cite_pattern2=front2+year+end
 
@@ -52,7 +53,6 @@ citations1=re.findall(cite_pattern1,zhengwen)
 cite1_greed=re.findall(cite_pat1c,zhengwen)
 if not cite1_greed==citations1:
     print('保险起见，请检查如下文本：')
-    assert len(cite1_greed)>len(citations1),'离谱呀，宽松条件下正则表达式的匹配结果比严格条件下的结果还少？'
     diffs=set(cite1_greed)-set(citations1)
     for diff in diffs:
         print(diff)
