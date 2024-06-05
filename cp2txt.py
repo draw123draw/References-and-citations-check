@@ -40,7 +40,7 @@ cite_pattern1=front+repeat_pattern+author_year+end
 
 #cite_pattern2匹配"作者(年份)"
 #front2='(?<=\n|^|[.。)）;；，,])[\p{L}\p{M} -]+?(?:al\.)? ?[(（] ?'
-front2='[\p{L}\p{M}]+(?: and [A-Z][\p{L}\p{M}]+)?(?: et al\.)? ?[(（] ?'
+front2='[A-Z][\p{L}\p{M}]+(?: and [A-Z][\p{L}\p{M}]+)?(?: et al\.)? ?[(（] ?'
 year='(?:(?:19|20)\d{2}[ab]?[，,；;] ?)*?(?:18|19|20)\d{2}[ab]?'
 cite_pattern2=front2+year+end
 
